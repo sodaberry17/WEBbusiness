@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Right Frame</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #282c34; /* Dark background for the frame */
+            font-family: 'Arial Narrow Bold', Arial, sans-serif;
+            height: 100%;
+            color: #ffffff; /* Light text color for contrast */
+        }
+
+        .right-frame {
+            width: 100%;
+            height: 100vh;
+            box-sizing: border-box;
+            background-color: #3a3f47; /* Slightly lighter dark background */
+            border-bottom: 2px solid #444c56;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-y: auto;
+        }
+
+        .content {
+            margin: 0;
+            padding: 20px;
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .intro {
+            text-align: center;
+        }
+
+        .item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border-radius: 8px;
+            background: #4a4f58; /* Slightly different background for each item */
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .item img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .item .description {
+            flex: 1;
+        }
+
+        .content h1, .content h2 {
+            color: #ffffff;
+        }
+
+        .content p {
+            color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="right-frame">
+        <div class="content" id="content">
+            <div class="intro">
+                <h1>Welcome!</h1>
+                <p>Select a tab from the left frame to know more information about me.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('message', function(event) {
+            if (event.data.type === 'UPDATE_CONTENT') {
+                const content = document.getElementById('content');
+                
+                switch (event.data.tab) {
+                    case 'about':
+    content.innerHTML = `
+        <div class="intro">
+            <h1>About Me</h1>
+            <p>Hello! I’m Earl John Cainar, a 19-year-old student from Isabela State University. An enthusiastic film lover and avid traveler based in. With a keen interest in watching movies, exploring new cultures, or technology. I strive to connect with others and make the most of every experience.</p>
+            
+            <img src="image/IMG_20240731_140334.jpg" alt="About Me" style="width: 300px; height: auto; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);" />
+        </div>
+    `;
+
+                        break;
+                    case 'hobbies':
+                        content.innerHTML = `
+                            <div class="intro">
+                                <h1>Hobbies</h1>
+                                <p>I have a diverse range of interests that keep me engaged and excited about life. Here are some of my main hobbies:</p>
+                            </div>
+                            <div class="item">
+                                <img src="image/m368k64mghfy.jpg" alt="Watching Movies" />
+                                <div class="description">
+                                    <h2>Watching Movies</h2>
+                                    <p>One of my favorite pastimes is watching movies. I enjoy exploring different genres and discussing films with friends.</p>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <img src="image/gettyimages-857379930.webp" alt="Gaming" />
+                                <div class="description">
+                                    <h2>Gaming</h2>
+                                    <p>Gaming is a big part of my life, from console games to PC gaming. It’s a great way to unwind and have fun.</p>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <img src="image/Vision-1-1.jpg" alt="Traveling" />
+                                <div class="description">
+                                    <h2>Traveling</h2>
+                                    <p>Exploring new places and cultures is one of my greatest passions. Every trip brings new experiences and memories.</p>
+                                </div>
+                            </div>
+                        `;
+                        break;
+                    case 'favorites':
+                        content.innerHTML = `
+                            <div class="intro">
+                                <h1>Favorites</h1>
+                                <p>Here are some of my favorite things:</p>
+                            </div>
+                            <div class="item">
+                                <img src="image/MV5BNmQ0ODBhMjUtNDRhOC00MGQzLTk5MTAtZDliODg5NmU5MjZhXkEyXkFqcGdeQXVyNDUyOTg3Njg@._V1_.jpg" alt="Harry Potter" />
+                                <div class="description">
+                                    <h2>Favorite Movie</h2>
+                                    <p>One of my all-time favorite movies is "Harry Potter". The magical world and captivating story have always fascinated me.</p>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <img src="image/bicol-express-recipe-1.jpg" alt="Bicol Express" />
+                                <div class="description">
+                                    <h2>Favorite Food</h2>
+                                    <p>My favorite food is Bicol Express. The rich and spicy flavor of this dish makes it a standout in my culinary experiences.</p>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <img src="image/84f0a15a-a570-11ea-8ea0-d7434be00753_image_hires_172942.webp" alt="Billie Eilish" />
+                                <div class="description">
+                                    <h2>Favorite Artist</h2>
+                                    <p>Billie Eilish is my favorite artist. Her unique style and emotive music have a profound impact on me.</p>
+                                </div>
+                            </div>
+                        `;
+                        break;
+                        case 'schedule':
+                        content.innerHTML = `
+                            <div class="intro">
+                                <h1>Schedule</h1>
+                                <p>For a detailed view of my schedule, please visit <a href="activity5-SCHED.html" class="link">my schedule page</a>.</p>
+                            </div>
+                        `;
+                        break;
+                    default:
+                        content.innerHTML = '<div class="intro"><h1>Welcome</h1><p>Select a tab from the left frame to see the content here.</p></div>';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
