@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Account</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #96878e 0%, #884b5f 100%);
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #884b5f;
+        }
+        .user-info {
+            margin-bottom: 30px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            font-size: 1.1em;
+        }
+        h3 {
+            border-bottom: 2px solid #884b5f;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            color: #884b5f;
+        }
+        .order-item {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .order-item-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .quantity {
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        .price-tag {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        .button-container {
+            margin-top: 10px;
+        }
+        .button-container button {
+            margin-right: 5px;
+        }
+    </style>
+    <script>
+        function loadUserInfo() {
+            const userInfo = JSON.parse(localStorage.getItem('userInfo')) || {};
+            document.getElementById('user-info').innerText = `Name: ${userInfo.name || 'N/A'}, Contact: ${userInfo.contact || 'N/A'}, Barangay: ${userInfo.barangay || 'N/A'}, Address: ${userInfo.address || 'N/A'}`;
+            
+            loadOrders('purchases', 'purchases-container');
+            loadOrders('toShip', 'to-ship-container');
+            loadOrders('toReceive', 'to-receive-container');
+        }
+
+        function loadOrders(storageKey, containerId) {
+            const orders = JSON.parse(localStorage.getItem(storageKey)) || [];
+            let container = document.getElementById(containerId);
+            container.innerHTML = '';
+
+            orders.forEach((item, index) => {
+                container.innerHTML += `
+                    <div class="order-item">
+                        <p class="order-item-title">${item.product}</p>
+                        <p class="quantity">Quantity: ${item.quantity}</p>
+                        <p class="price-tag">P${item.price} each</p>
+                        <p class="price-tag">Subtotal: P${item.price * item.quantity}</p>
+                        <div class="button-container">
+                            <button onclick="updateItem('${storageKey}', ${index})">Update</button>
+                            <button onclick="deleteItem('${storageKey}', ${index})">Delete</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function updateItem(storageKey, index) {
+            const newQuantity = prompt('Enter new quantity:');
+            if (newQuantity !== null && !isNaN(newQuantity) && newQuantity > 0) {
+                let orders = JSON.parse(localStorage.getItem(storageKey)) || [];
+                orders[index].quantity = parseInt(newQuantity);
+                localStorage.setItem(storageKey, JSON.stringify(orders));
+                loadOrders(storageKey, storageKey === 'purchases' ? 'purchases-container' : storageKey === 'toShip' ? 'to-ship-container' : 'to-receive-container');
+            }
+        }
+
+        function deleteItem(storageKey, index) {
+            let orders = JSON.parse(localStorage.getItem(storageKey)) || [];
+            orders.splice(index, 1);
+            localStorage.setItem(storageKey, JSON.stringify(orders));
+            loadOrders(storageKey, storageKey === 'purchases' ? 'purchases-container' : storageKey === 'toShip' ? 'to-ship-container' : 'to-receive-container');
+        }
+
+        window.onload = loadUserInfo;
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Your Account</h2>
+        <div class="user-info" id="user-info">Info: [User Info]</div>
+        
+        <h3>Purchases</h3>
+        <div id="purchases-container"></div>
+        
+        <h3>To Ship</h3>
+        <div id="to-ship-container"></div>
+        
+        <h3>To Receive</h3>
+        <div id="to-receive-container"></div>
+    </div>
+</body>
+</html>

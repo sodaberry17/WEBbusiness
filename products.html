@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #96878e 0%, #884b5f 100%);/* Soft gradient background */
+            font-family: 'Arial', sans-serif; /* Modern and clean font */
+            margin: 0;
+            padding: 0;
+            color: #333; /* Dark text color for readability */
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #884b5f; /* White background for content */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+        }
+        h2 {
+            text-align: center;
+            color: #4CAF50; /* Green color for the header */
+            margin-bottom: 20px;
+        }
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .search-bar input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        .search-bar button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        .search-bar button:hover {
+            background-color: #45a049;
+        }
+        .products-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .product {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            text-align: center;
+            width: 200px;
+            transition: transform 0.3s;
+        }
+        .product:hover {
+            transform: scale(1.05); /* Zoom effect on hover */
+        }
+        .product img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .product-title {
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .price-tag {
+            color: #4CAF50; /* Green color for price */
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        button.add-to-cart {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        button.add-to-cart:hover {
+            background-color: #45a049;
+        }
+        #results {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .no-results {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Frozen Foods</h2>
+        
+        <!-- Search Functionality -->
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Search products...">
+            <button onclick="searchProducts()">Search</button>
+        </div>
+        <div id="results"></div>
+        
+        <!-- Products List -->
+        <div class="products-grid">
+            <div class="product" data-title="Longganisa">
+                <img src="https://i.pinimg.com/736x/2d/7d/e7/2d7de7492a07e389dcd6ca7b1f7e62b1.jpg" alt="Longganisa">
+                <p class="product-title">Longganisa</p>
+                <p class="price-tag">P150</p>
+                <button class="add-to-cart" onclick="addToCart('Longganisa', 150)">Add to Cart</button>
+            </div>
+            <div class="product" data-title="Embutido">
+                <img src="https://www.keyingredient.com/uploads/media/74/a4/629623c720cdfd61d7df8118d7044ccae121.jpg?1560428051" alt="Embutido">
+                <p class="product-title">Embutido</p>
+                <p class="price-tag">P120</p>
+                <button class="add-to-cart" onclick="addToCart('Embutido', 120)">Add to Cart</button>
+            </div>
+            <div class="product" data-title="Tocino">
+                <img src="https://www.pampangasbest.com/wp-content/uploads/2016/04/240g-2.png" alt="Tocino">
+                <p class="product-title">Tocino</p>
+                <p class="price-tag">P90</p>
+                <button class="add-to-cart" onclick="addToCart('Tocino', 90)">Add to Cart</button>
+            </div>
+            <div class="product" data-title="Shanghai">
+                <img src="https://media.karousell.com/media/photos/products/2022/6/27/lumpiang_shanghai_1656322157_b7052361.jpg" alt="Shanghai">
+                <p class="product-title">Shanghai</p>
+                <p class="price-tag">P160</p>
+                <button class="add-to-cart" onclick="addToCart('Shanghai', 160)">Add to Cart</button>
+            </div>
+            <div class="product" data-title="Hotdog">
+                <img src="https://cdn.shopify.com/s/files/1/0537/7104/2998/products/martin-purefoods-hotdog-with-cheese_1024x1024.jpg?v=1621054569" alt="Hotdog">
+                <p class="product-title">Hotdog</p>
+                <p class="price-tag">P70</p>
+                <button class="add-to-cart" onclick="addToCart('Hotdog', 70)">Add to Cart</button>
+            </div>
+            <div class="product" data-title="Fishballs">
+                <img src="https://img06.weeecdn.com/product/image/380/816/2D1409248BE99C5E.png" alt="Fishballs">
+                <p class="product-title">Fishballs</p>
+                <p class="price-tag">P65</p>
+                <button class="add-to-cart" onclick="addToCart('Fishballs', 65)">Add to Cart</button>
+            </div>
+            <div class="product" data-title="Kikiam">
+                <img src="https://static.wixstatic.com/media/9506a3_2f8e354c495f478a979102b7e9556a7b~mv2.jpg/v1/fill/w_980,h_985,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/9506a3_2f8e354c495f478a979102b7e9556a7b~mv2.jpg" alt="Kikiam">
+                <p class="product-title">Kikiam</p>
+                <p class="price-tag">P80</p>
+                <button class="add-to-cart" onclick="addToCart('Kikiam', 80)">Add to Cart</button>
+            </div>
+            <div class="product" data-title="Nuggets">
+                <img src="https://i5.walmartimages.com/asr/556458de-b489-47ff-8f04-21e9e11cda57.3674174524ac4aaec3b49ac1103105a4.jpeg" alt="Nuggets">
+                <p class="product-title">Nuggets</p>
+                <p class="price-tag">P80</p>
+                <button class="add-to-cart" onclick="addToCart('Nuggets', 80)">Add to Cart</button>
+            </div>
+            <div class="product" data-title="Siomai">
+                <img src="https://d2t3trus7wwxyy.cloudfront.net/catalog/product/1/0/10086281_fnc_frozen_siomai_20s.jpg" alt="Siomai">
+                <p class="product-title">Siomai</p>
+                <p class="price-tag">P150</p>
+                <button class="add-to-cart" onclick="addToCart('Siomai', 150)">Add to Cart</button>
+            </div>
+            <div class="product" data-title="Squidballs">
+                <img src="https://images.freshop.com/1564405684702551732/a99c0212be000e61e93a5a46a2d11b60_large.png" alt="Squidballs">
+                <p class="product-title">Squidballs</p>
+                <p class="price-tag">P90</p>
+                <button class="add-to-cart" onclick="addToCart('Squidballs', 90)">Add to Cart</button>
+            </div>
+            <div class="product" data-title="Ham">
+                <img src="https://www.cebugrocery.com/images/detailed/2/46186f87080a55dc732abc5c5c9e9853_large.png" alt="Ham">
+                <p class="product-title">Ham</p>
+                <p class="price-tag">P120</p>
+                <button class="add-to-cart" onclick="addToCart('Ham', 120)">Add to Cart</button>
+            </div>
+            <div class="product" data-title="Chicken Barbeque">
+                <img src="https://d2t3trus7wwxyy.cloudfront.net/catalog/product/p/u/purefoods_rte_chicken_barbecue_450g_10404228.png" alt="Chicken Barbeque">
+                <p class="product-title">Chicken Barbeque</p>
+                <p class="price-tag">P175</p>
+                <button class="add-to-cart" onclick="addToCart('Chicken Barbeque', 175)">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function addToCart(product, price) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push({ product, price });
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(product + " added to cart!");
+        }
+        
+        function searchProducts() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            const resultsContainer = document.getElementById('results');
+            const products = document.querySelectorAll('.product');
+            
+            // Clear previous results
+            resultsContainer.innerHTML = '';
+            
+            let found = false;
+            
+            products.forEach(product => {
+                const title = product.getAttribute('data-title').toLowerCase();
+                if (title.includes(query)) {
+                    product.style.display = 'block';
+                    resultsContainer.appendChild(product.cloneNode(true));
+                    found = true;
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+            
+            // Display "No Products Available" if no products match
+            if (!found) {
+                resultsContainer.innerHTML = '<div class="no-results">No Products Available</div>';
+            }
+        }
+    </script>
+</body>
+</html>
+

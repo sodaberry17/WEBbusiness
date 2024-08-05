@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #96878e 0%, #884b5f 100%);
+            font-family: 'Courier New', Courier, monospace;
+            padding: 10px;
+        }
+        .cart-item {
+            border: 1px solid #ddd;
+            padding: 8px;
+            margin: 8px;
+            text-align: center;
+        }
+        .cart-item img {
+            width: 100px;
+            height: 100px;
+        }
+        .cart-item-title {
+            font-weight: bold;
+        }
+        .quantity {
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        .price-tag {
+            color: green;
+        }
+        .total {
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .checkout-button, .remove-button {
+            padding: 5px 10px;
+            margin-top: 5px;
+        }
+        .user-info {
+            margin-top: 20px;
+        }
+        .user-info input, .user-info select {
+            padding: 5px;
+            margin: 5px 0;
+            width: calc(100% - 12px);
+        }
+    </style>
+    <script>
+        function loadCart() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let cartContainer = document.getElementById('cart-container');
+            let total = 0;
+
+            cart.forEach(item => {
+                total += item.price * item.quantity;
+                cartContainer.innerHTML += `
+                    <div class="cart-item">
+                        <img src="https://via.placeholder.com/100" alt="${item.product}">
+                        <p class="cart-item-title">${item.product}</p>
+                        <p class="quantity">Quantity: ${item.quantity}</p>
+                        <p class="price-tag">P${item.price} each</p>
+                        <p class="price-tag">Subtotal: P${item.price * item.quantity}</p>
+                        <button class="remove-button" onclick="removeFromCart('${item.product}')">Remove</button>
+                    </div>
+                `;
+            });
+
+            document.getElementById('total').innerText = 'Total: P' + total;
+        }
+
+        function removeFromCart(product) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart = cart.filter(item => item.product !== product);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            location.reload();
+        }
+
+        function checkout() {
+            const name = document.getElementById('name').value;
+            const contact = document.getElementById('contact').value;
+            const barangay = document.getElementById('barangay').value;
+            const address = document.getElementById('address').value;
+
+            const userInfo = { name, contact, barangay, address };
+            localStorage.setItem('userInfo', JSON.stringify(userInfo));
+
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            localStorage.setItem('purchases', JSON.stringify(cart));
+            localStorage.setItem('toShip', JSON.stringify(cart));
+            localStorage.setItem('toReceive', JSON.stringify([]));
+
+            localStorage.removeItem('cart');
+            alert('Checkout successful!');
+            window.location.href = 'account.html';
+        }
+
+        window.onload = loadCart;
+    </script>
+</head>
+<body>
+    <h2>Your Cart</h2>
+    <div id="cart-container"></div>
+    <p id="total" class="total">Total: P0</p>
+    <button class="checkout-button" onclick="checkout()">Checkout</button>
+
+    <div class="user-info">
+        <h3>Enter Your Information</h3>
+        <input type="text" id="name" placeholder="Full Name" required>
+        <input type="text" id="contact" placeholder="Contact Number" required>
+        <select id="barangay" required>
+            <option value="">Select Barangay</option>
+            <option value="Saranay">Saranay</option>
+            <option value="Progreso">Progreso</option>
+            <option value="Namnama">Namnama</option>
+            <option value="Karayo">Karayo</option>
+            <option value="Linglingay">Linglingay</option>
+            <option value="Raniag">Raniag</option>
+            <option value="Pag-asa">Pag-asa</option>
+            <option value="Nasudi">Nasudi</option>
+            <option value="Anaraar">Anaraar</option>
+        </select>
+        <input type="text" id="address" placeholder="Full Address" required>
+    </div>
+</body>
+</html>

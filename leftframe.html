@@ -1,0 +1,56 @@
+<!-- leftFrame.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Navigation</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #96878e 0%, #884b5f 100%);
+            font-family: 'Arial', sans-serif; /* Clean, modern font */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .nav-container {
+            width: 250px; /* Fixed width for the navigation panel */
+            background-color: #96878e 0%; /* Deep blue background */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow */
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        a {
+            display: block;
+            padding: 10px;
+            margin: 10px 0;
+            text-decoration: none;
+            color: #ffffff; /* White text */
+            font-size: 1.1em; /* Slightly larger font size */
+            border-radius: 4px; /* Rounded corners for links */
+            transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+        }
+        a:hover {
+            background-color: #5c6bc0; /* Slightly lighter blue for hover effect */
+            color: #f5f5f5; /* Light color text on hover */
+        }
+        a.active {
+            background-color: #283593; /* Darker blue for active link */
+            color: #e8eaf6; /* Light color text for active link */
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-container">
+        <a href="products.html" target="rightFrame">Products</a>
+        <a href="account.html" target="rightFrame">Account</a>
+        <a href="search.html" target="rightFrame">Search Products</a>
+        <a href="contact.html" target="rightFrame">Message Seller</a>
+        <a href="address.html" target="rightFrame">Barangay Address</a>
+        <a href="cart.html" target="rightFrame">My Cart</a>
+        <a href="members.html" target="rightFrame">Group Members</a>
+    </div>
+</body>
+</html>

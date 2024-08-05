@@ -1,0 +1,104 @@
+<!-- search.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Products</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #96878e 0%, #884b5f 100%);
+            font-family: 'Courier New', Courier, monospace;
+            padding: 10px;
+        }
+        #results {
+            margin-top: 20px;
+        }
+        .no-results {
+            color: red;
+        }
+        .product {
+            border: 1px solid #ddd;
+            padding: 8px;
+            margin: 8px;
+            text-align: center;
+        }
+        .product img {
+            width: 100px;
+            height: 100px;
+        }
+        .product-title {
+            font-weight: bold;
+        }
+        .price-tag {
+            color: green;
+        }
+        button {
+            padding: 5px 10px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Search Products</h2>
+    <input type="text" id="search-input" placeholder="Search...">
+    <button onclick="searchProducts()">Search</button>
+    <div id="results"></div>
+
+    <script>
+        // Array of product objects
+        const products = [
+            { name: "Longganisa", price: 150, image: "https://i.pinimg.com/736x/2d/7d/e7/2d7de7492a07e389dcd6ca7b1f7e62b1.jpg" },
+            { name: "Embutido", price: 120, image: "https://www.keyingredient.com/uploads/media/74/a4/629623c720cdfd61d7df8118d7044ccae121.jpg?1560428051" },
+            { name: "Tocino", price: 90, image: "https://www.pampangasbest.com/wp-content/uploads/2016/04/240g-2.png" },
+            { name: "Shanghai", price: 160, image: "https://media.karousell.com/media/photos/products/2022/6/27/lumpiang_shanghai_1656322157_b7052361.jpg" },
+            { name: "Hotdog", price: 70, image: "https://cdn.shopify.com/s/files/1/0537/7104/2998/products/martin-purefoods-hotdog-with-cheese_1024x1024.jpg?v=1621054569" },
+            { name: "Fishballs", price: 65, image: "https://img06.weeecdn.com/product/image/380/816/2D1409248BE99C5E.png" },
+            { name: "Kikiam", price: 80, image: "https://static.wixstatic.com/media/9506a3_2f8e354c495f478a979102b7e9556a7b~mv2.jpg/v1/fill/w_980,h_985,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/9506a3_2f8e354c495f478a979102b7e9556a7b~mv2.jpg" },
+            { name: "Nuggets", price: 80, image: "https://i5.walmartimages.com/asr/556458de-b489-47ff-8f04-21e9e11cda57.3674174524ac4aaec3b49ac1103105a4.jpeg" },
+            { name: "Siomai", price: 150, image: "https://d2t3trus7wwxyy.cloudfront.net/catalog/product/1/0/10086281_fnc_frozen_siomai_20s.jpg" },
+            { name: "Squidballs", price: 90, image: "https://images.freshop.com/1564405684702551732/a99c0212be000e61e93a5a46a2d11b60_large.png" },
+            { name: "Ham", price: 120, image: "https://www.cebugrocery.com/images/detailed/2/46186f87080a55dc732abc5c5c9e9853_large.png" },
+            { name: "Chicken Barbeque", price: 175, image: "https://d2t3trus7wwxyy.cloudfront.net/catalog/product/p/u/purefoods_rte_chicken_barbecue_450g_10404228.png" }
+        ];
+
+        // Function to search and display products
+        function searchProducts() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            const resultsContainer = document.getElementById('results');
+            
+            // Clear previous results
+            resultsContainer.innerHTML = '';
+
+            // Filter products based on query
+            const filteredProducts = products.filter(product =>
+                product.name.toLowerCase().includes(query)
+            );
+
+            // Display results
+            if (filteredProducts.length > 0) {
+                filteredProducts.forEach(product => {
+                    const div = document.createElement('div');
+                    div.className = 'product';
+                    div.innerHTML = `
+                        <img src="${product.image}" alt="${product.name}">
+                        <p class="product-title">${product.name}</p>
+                        <p class="price-tag">P${product.price}</p>
+                        <button onclick="addToCart('${product.name}', ${product.price})">Add to Cart</button>
+                    `;
+                    resultsContainer.appendChild(div);
+                });
+            } else {
+                resultsContainer.innerHTML = '<div class="no-results">No Products Available</div>';
+            }
+        }
+
+        function addToCart(product, price) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push({ product, price });
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(product + " added to cart!");
+        }
+    </script>
+</body>
+</html>
+
