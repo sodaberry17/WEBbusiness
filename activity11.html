@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frameset Example with Top Row</title>
+</head>
+<frameset rows="20%, 90%">
+    <frame src="top_frame.html" name="topFrame">
+    <frameset cols="25%, 75%">
+            <frame src="left_frame.html" name="leftFrame">
+            <frame src="right_frame.html" name="rightFrame">
+    </frameset>
+</frameset>
+<noframes>
+    <body>
+        <p>
+            This page requires a browser that supports frames.
+        </p>
+</noframes>
+
+</body>
+</html>

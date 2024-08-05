@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three Frame Layout</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            grid-template-rows: auto 1fr;
+            gap: 10px;
+            background: #3e3a39; /* Dark vintage background */
+            color: #e5e5e5; /* Light vintage text color */
+        }
+        .header {
+            grid-column: 1 / span 3;
+            background-color: #6b4f4f; /* Vintage header color */
+            color: #e5e5e5;
+            padding: 15px;
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            border-bottom: 3px solid #b49a8a; /* Vintage border */
+        }
+        .frame {
+            background-color: #f7f7f7; /* Light vintage frame color */
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            overflow-y: auto;
+            color: #333; /* Darker text for better readability */
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        .left-frame, .center-frame, .right-frame {
+            background-color: #e0dcd9; /* Slightly different shades for frames */
+        }
+        .left-frame {
+            grid-column: 1;
+        }
+        .center-frame {
+            grid-column: 2;
+        }
+        .right-frame {
+            grid-column: 3;
+        }
+        .frame img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 2px solid #d4b5b5; /* Vintage border around images */
+        }
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: #6b4f4f;
+            color: #e5e5e5;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 16px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .back-button:hover {
+            background-color: #5b4343; /* Darker on hover */
+        }
+    </style>
+</head>
+<body>
+    <a href="myActivities.html" class="back-button">Back</a>
+    
+    <div class="header">FRAMESET</div>
+    
+    <div class="frame left-frame">
+        <h2>The Boy who cried wolf</h2>
+        <img src="https://momlovesbest.com/wp-content/uploads/2019/11/The-Boy-Who-Cried-Wolf.webp" alt="Left Frame Image">
+        <p>Once, there was a boy who became bored when he watched over the village sheep grazing on the hillside. To entertain himself, he sang out, “Wolf! Wolf! The wolf is chasing the sheep!”
+
+            When the villagers heard the cry, they ran up the hill to drive the wolf away. But when they arrived, they saw no wolf. The boy was amused when he saw their angry faces.
+            
+            “Don’t scream wolf when there is no wolf, boy!” the villagers warned. They angrily went back down the hill.
+            
+            Later, the shepherd boy cried out once again, “Wolf! Wolf! The wolf is chasing the sheep!” To his amusement, the villagers came running up the hill to scare the wolf away.
+            
+            As they saw there was no wolf, they said strictly, “Save your frightened cry for when there really is a wolf! Don’t cry ‘wolf’ when there is no wolf!” But the boy grinned at their words while they walked, grumbling down the hill once more.
+            
+            Later, the boy saw a real wolf sneaking around his flock. Alarmed, he jumped on his feet and cried out as loud as he could, “Wolf! Wolf!” But the villagers thought he was fooling them again, and they didn’t come to help. At sunset, the villagers went looking for the boy who hadn’t returned with their sheep. When they went up the hill, they found him weeping.
+
+            “There was a wolf here! The flock is gone! I cried out, ‘Wolf!’ but you didn’t come,” he wailed.
+            
+            An older man went to comfort the boy. As he put his arm around him, he said, “Nobody believes a liar, even when he is telling the truth!”</p>
+    </div>
+    <div class="frame center-frame">
+        <h2>The Milkmaid and Her Pail</h2>
+        <img src="https://cdn.shopify.com/s/files/1/2137/3313/products/the-milkmaid-and-her-pail_1024x1024.jpg?v=1571876412" alt="Center Frame Image">
+        <p>One day, Molly the milkmaid had filled her pails with milk. Her job was to milk the cows and then bring the milk to the market to sell. Molly loved to think about what to spend her money on.
+
+            As she filled the pails with milk and went to market, she again thought of all the things she wanted to buy. As she walked along the road, she thought of buying a cake and a basket full of fresh strawberries.
+            
+            A little further down the road, she spotted a chicken. She thought, “With the money I get from today, I’m going to buy my own chicken. That chicken will lay eggs; then I can sell milk and eggs and get more money!”
+            
+            She continued, “With more money, I can buy a fancy dress and make all the other milkmaids jealous.” Out of excitement, Molly started skipping, forgetting about the milk in her pails. Soon, the milk started spilling over the edges, covering Molly.
+            
+            Drenched, Molly said to herself, “Oh no! I will never have enough money to buy a chicken now.” She went home with her empty pails.
+            
+            “Oh, my goodness! What happened to you?” Molly’s mother asked.
+            
+            “I was too busy dreaming about all the things I wanted to buy that I forgot about the pails,” she answered.
+            
+            “Oh, Molly, my dear. How many times do I need to say, ‘Don’t count your chickens until they hatch?’”
+            
+            </p>
+    </div>
+    <div class="frame right-frame">
+        <h2>A Wise Old Owl</h2>
+        <img src="https://i.pinimg.com/736x/05/2a/8d/052a8d3718440596da65d2ded0a570cf.jpg" alt="Right Frame Image">
+        <p>There was an old owl who lived in an oak tree. Every day, he observed incidents that occurred around him.
+
+            Yesterday, he watched as a young boy helped an older man carry a heavy basket. Today, he saw a young girl shouting at her mother. The more he saw, the less he spoke.
+            
+            As the days went on, he spoke less but heard more. The old owl heard people talking and telling stories.
+            
+            He heard a woman saying an elephant jumped over a fence. He heard a man saying that he had never made a mistake.
+            
+            The old owl had seen and heard what happened to people. Some became better, and some became worse. But the old owl in the tree had become wiser each day.</p>
+    </div>
+</body>
+</html>
